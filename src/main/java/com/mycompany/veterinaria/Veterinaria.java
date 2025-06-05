@@ -35,29 +35,52 @@ public class Veterinaria {
     }
 
     public void registrarMascota() {
-        System.out.println("\n--- Registrar Mascota para Cliente Existente ---");
-        if (listaClientes.isEmpty()) {
-            System.out.println("No hay clientes registrados. Por favor, registre un cliente primero.");
-            return;
-        }
+    System.out.println("\n--- Registrar Mascota para Cliente Existente ---");
+    
+    if (listaClientes.isEmpty()) {
+        System.out.println("No hay clientes registrados. Por favor, registre un cliente primero.");
+        return; // Termina el método aquí si no hay clientes
+    }
 
-        System.out.print("Ingrese el numero de identificación del cliente al que desea agregar una mascota: ");
-        String idCliente = scanner.nextLine();
+    System.out.print("Ingrese el número de identificación del cliente al que desea agregar una mascota: ");
+    String idCliente = scanner.nextLine();
 
-        Cliente clienteEncontrado = null;
-        for (Cliente cliente : listaClientes) {
-            if (cliente.getNumeroIdentificacion().equals(idCliente)) {
-                clienteEncontrado = cliente;
-                break;
-            }
-        }
+    Cliente clienteEncontrado = null;  // Declara la variable aquí, para que esté visible en todo el método
 
-        if (clienteEncontrado != null) {
-            clienteEncontrado.agregarMascota(); // Llama al método agregarMascota del objeto Cliente
-        } else {
-            System.out.println("Cliente con identificacion " + idCliente + " no encontrado.");
+    for (Cliente cliente : listaClientes) {
+        if (cliente.getNumeroIdentificacion().equals(idCliente)) {
+            clienteEncontrado = cliente;
+            break;
         }
     }
+
+    if (clienteEncontrado != null) {
+        // Pedimos datos de la mascota
+        System.out.print("Nombre de la mascota: ");
+        String nombreMascota = scanner.nextLine();
+
+        System.out.print("Tipo de mascota (Perro, Gato, etc.): ");
+        String tipoMascota = scanner.nextLine();
+
+        System.out.print("Raza de la mascota: ");
+        String razaMascota = scanner.nextLine();
+
+        System.out.print("Edad de la mascota: ");
+        int edadMascota = scanner.nextInt();
+        scanner.nextLine(); // Limpiar buffer después de nextInt()
+
+        // Crear la nueva mascota con los datos y el cliente como dueño
+        Mascota nuevaMascota = new Mascota(nombreMascota, tipoMascota, razaMascota, edadMascota, clienteEncontrado);
+
+        // Agregar la mascota al cliente
+        clienteEncontrado.agregarMascota(nuevaMascota);
+
+        System.out.println("Mascota " + nombreMascota + " registrada exitosamente para el cliente " + clienteEncontrado.getNombreCompleto() + ".");
+    } else {
+        System.out.println("Cliente con identificación " + idCliente + " no encontrado.");
+    }
+}
+
 
     // esqueletos
     public void programarCita() {

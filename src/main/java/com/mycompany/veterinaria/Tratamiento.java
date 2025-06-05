@@ -1,13 +1,27 @@
 package com.mycompany.veterinaria;
 
 public class Tratamiento {
-    private String descripcion;
+    private String nombre;
+    private String instrucciones;
 
-    public Tratamiento(String descripcion) {
-        this.descripcion = descripcion;
+    // Constructor
+    public Tratamiento(String nombre, String instrucciones) {
+        this.nombre = nombre;
+        this.instrucciones = instrucciones;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    // Getters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getInstrucciones() {
+        return instrucciones;
+    }
+
+    // Método para mostrar tratamiento
+    public void mostrarTratamiento() {
+        System.out.println("Tratamiento: " + nombre);
+        System.out.println("Instrucciones: " + instrucciones);
     }
 }

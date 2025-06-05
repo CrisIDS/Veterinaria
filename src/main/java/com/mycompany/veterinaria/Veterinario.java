@@ -28,8 +28,11 @@ public class Veterinario extends Persona {
     }
 
     public void registrarTratamiento(Cita cita, Tratamiento tratamiento) {
-        cita.registrarDiagnostico("Tratamiento aplicado: " + tratamiento.getDescripcion());
+        String resumen = "Tratamiento aplicado: " + tratamiento.getNombre()
+                   + " - Instrucciones: " + tratamiento.getInstrucciones();
+        cita.registrarDiagnostico(resumen);
     }
+
 
     public String getEspecialidad() {
         return especialidad;
